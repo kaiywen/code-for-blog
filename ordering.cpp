@@ -1,3 +1,7 @@
+/* This file comes from http://preshing.com, a personal blog of Preshing.
+ * It is modified to support MacOS
+ */
+
 #include <pthread.h>
 #include <stdio.h>
 
@@ -10,6 +14,8 @@
 // Set either of these to 1 to prevent CPU reordering
 #define USE_CPU_FENCE              0
 #define USE_SINGLE_HW_THREAD       0  // Supported on Linux, but not Cygwin or PS3
+
+#define MAX_ITER                   3000000
 
 #if USE_SINGLE_HW_THREAD
 #include <sched.h>
@@ -154,7 +160,7 @@ int main() {
 
     // Repeat the experiment ad infinitum
     int detected = 0;
-    for (int iterations = 1; ; iterations++) {
+    for (int iterations = 1; iterations < MAX_ITER ; iterations++) {
         // Reset X and Y
         X = 0;
         Y = 0;
